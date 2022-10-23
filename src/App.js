@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Expenses from "./components/expense/Expenses";
 import NewExpense from "./components/input/NewExpense";
 const json = [
@@ -22,14 +23,18 @@ const json = [
     date: new Date(2021, 5, 12)
   }
 ];
-const Addit = (data) => {
-  console.log(data);
-};
+
 const App = () => {
+  const [from,to]=useState(json);
+  const Addit = (New_Expense_data) => {
+    to((prevstate)=>{
+      return [...prevstate,New_Expense_data];
+    });
+  };
   return (
     <div>
     <NewExpense onAdd={Addit}/>
-    <Expenses item={json}/>
+    <Expenses item={from}/>
     </div>
   );
 };
